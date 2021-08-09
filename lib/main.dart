@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gobanten/Provider/ProviderUser.dart';
-import 'package:gobanten/Screens/Login/login_screen.dart';
 import 'package:gobanten/Screens/ScreensHome.dart';
 import 'package:gobanten/Screens/Welcome/welcome_screen.dart';
 import 'package:gobanten/Utils/constants.dart';
@@ -33,14 +32,12 @@ class MyApp extends StatelessWidget {
                     future: a.autoLogin(),
                     builder: (context, snapshot) {
                       if (snapshot.hasData) {
-                        print('Has data : ${snapshot.hasData}');
                         if (!snapshot.data) {
                           return WelcomeScreen();
                         } else {
                           return ScreensHome();
                         }
                       } else {
-                        print('Has data : ${snapshot.hasData}');
                         return Scaffold(
                           body: Center(
                             child: CircularProgressIndicator(),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:gobanten/Provider/ProviderUser.dart';
-import 'package:gobanten/Screens/Welcome/welcome_screen.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gobanten/components/ComponentAccount.dart';
+import 'package:gobanten/components/ComponentListOrder.dart';
+import 'package:gobanten/Utils/color_constant.dart';
+import 'package:gobanten/components/ComponentHome.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ScreensHome extends StatefulWidget {
   const ScreensHome({Key key}) : super(key: key);
@@ -12,127 +15,80 @@ class ScreensHome extends StatefulWidget {
 
 class _ScreensHomeState extends State<ScreensHome> {
   String url;
+  int _selectedIndex;
+
+  var bottomTextStyle =
+      GoogleFonts.inter(fontSize: 12, fontWeight: FontWeight.w500);
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
   void initState() {
     super.initState();
-    url =
-        'https://images.unsplash.com/photo-1628307585477-a5acf1ac6630?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80';
+    _selectedIndex = 0;
   }
+
+  final List<Widget> _children = [
+    ComponentHome(),
+    ComponentListOrder(),
+    ComponentAccount(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Consumer<AuthService>(
-      builder: (_, a, child) {
-        return Stack(
-          children: [
-            Image.network(
-              url,
-              fit: BoxFit.fitHeight,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                  height: MediaQuery.of(context).size.height / 1.5,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: Colors.white),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      GestureDetector(
-                        onTap: () async {
-                          a.logout();
-                          await Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WelcomeScreen(),
-                            ),
-                          );
-                        },
-                        child: Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: Text(
-                            'List Wisata',
-                            style:
-                                Theme.of(context).textTheme.headline5.copyWith(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 20,
-                                    ),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: ListView.builder(
-                          padding: EdgeInsets.only(top: 15, left: 10),
-                          itemBuilder: (context, index) {
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 10.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 80,
-                                        height: 80,
-                                        decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          image: DecorationImage(
-                                            fit: BoxFit.fill,
-                                            image: NetworkImage(
-                                                'https://images.unsplash.com/photo-1628307585477-a5acf1ac6630?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80'),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 10,
-                                      ),
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width -
-                                                100,
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Taman Lawang',
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .headline5
-                                                  .copyWith(
-                                                    fontWeight: FontWeight.w500,
-                                                    fontSize: 15,
-                                                  ),
-                                            ),
-                                            SizedBox(
-                                              height: 5,
-                                            ),
-                                            Text(
-                                              'Lokasi: Jl. HOS. Cokroaminoto No.20, RT.11/RW.4, Menteng, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10310',
-                                              maxLines: 3,
-                                              overflow: TextOverflow.ellipsis,
-                                            ),
-                                          ],
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                          itemCount: 3,
-                        ),
-                      ),
-                    ],
-                  )),
-            )
+    return Scaffold(
+      bottomNavigationBar: Container(
+        height: 64,
+        decoration: BoxDecoration(
+          color: mFillColor,
+          boxShadow: [
+            BoxShadow(
+                color: Colors.grey.withOpacity(0.3),
+                spreadRadius: 2,
+                blurRadius: 15,
+                offset: Offset(0, 5))
           ],
-        );
-      },
-    ));
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+        ),
+        child: BottomNavigationBar(
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 0
+                  ? new SvgPicture.asset('assets/icons/home_colored.svg')
+                  : new SvgPicture.asset('assets/icons/home.svg'),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 1
+                  ? new SvgPicture.asset('assets/icons/order_colored.svg')
+                  : new SvgPicture.asset('assets/icons/order.svg'),
+              label: 'My Order',
+            ),
+            BottomNavigationBarItem(
+              icon: _selectedIndex == 3
+                  ? new SvgPicture.asset('assets/icons/account_colored.svg')
+                  : new SvgPicture.asset('assets/icons/account.svg'),
+              label: 'Account',
+            ),
+          ],
+          currentIndex: _selectedIndex,
+          selectedItemColor: mBlueColor,
+          unselectedItemColor: mSubtitleColor,
+          onTap: _onItemTapped,
+          backgroundColor: Colors.transparent,
+          type: BottomNavigationBarType.fixed,
+          selectedFontSize: 12,
+          showUnselectedLabels: true,
+          elevation: 0,
+        ),
+      ),
+      body: _children[_selectedIndex],
+    );
   }
 }
