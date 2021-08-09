@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "925287165093",
+    "project_id": "gobanten-e2df9",
+    "storage_bucket": "gobanten-e2df9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925287165093:android:e07d8fc1405e4bb8b4314c",
+        "android_client_info": {
+          "package_name": "com.example.gobanten"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925287165093-vnhp1ksn124570adl67919ppp7jtpk9q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9-wy1q-jqUtJf3wrPzG4kcjVHblNfbrU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925287165093-vnhp1ksn124570adl67919ppp7jtpk9q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
