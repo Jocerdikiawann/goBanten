@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:gobanten/Provider/ProviderWisata.dart';
 import 'package:gobanten/components/ComponentAccount.dart';
 import 'package:gobanten/components/ComponentListOrder.dart';
 import 'package:gobanten/Utils/color_constant.dart';
 import 'package:gobanten/components/ComponentHome.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ScreensHome extends StatefulWidget {
   const ScreensHome({Key key}) : super(key: key);
@@ -26,9 +28,13 @@ class _ScreensHomeState extends State<ScreensHome> {
     });
   }
 
+  @override
   void initState() {
     super.initState();
     _selectedIndex = 0;
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<ProviderWisata>(context, listen: false).getWisata();
+    });
   }
 
   final List<Widget> _children = [

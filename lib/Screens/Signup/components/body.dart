@@ -53,6 +53,15 @@ class _BodyState extends State<Body> {
                     });
                   },
                 ),
+                RoundedInputField(
+                  hintText: "Your Address",
+                  tinggi: 8,
+                  onChanged: (value) {
+                    setState(() {
+                      name = value;
+                    });
+                  },
+                ),
                 RoundedPasswordField(
                   onChanged: (value) {
                     setState(() {

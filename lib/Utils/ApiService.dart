@@ -13,4 +13,7 @@ class ApiService {
     return Uri.parse(
         'https://gobanten-e2df9-default-rtdb.firebaseio.com/users.json?orderBy="id"&equalTo="$id"');
   }
+
+  Uri getWisata = Uri.parse(
+      'https://gobanten-e2df9-default-rtdb.firebaseio.com/wisata.json');
 }

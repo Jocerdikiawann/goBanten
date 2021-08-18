@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gobanten/Provider/ProviderUser.dart';
+import 'package:gobanten/Provider/ProviderWisata.dart';
 import 'package:gobanten/Screens/ScreensHome.dart';
 import 'package:gobanten/Screens/Welcome/welcome_screen.dart';
 import 'package:gobanten/Utils/constants.dart';
@@ -17,6 +18,9 @@ class MyApp extends StatelessWidget {
           // ChangeNotifierProvider<AuthService>.value(value: AuthService()),
           ChangeNotifierProvider(
             create: (_) => AuthService(),
+          ),
+          ChangeNotifierProvider(
+            create: (_) => ProviderWisata(),
           ),
         ],
         child: Consumer<AuthService>(

@@ -3,10 +3,15 @@ import 'package:flutter_svg/svg.dart';
 import 'package:gobanten/Screens/Login/login_screen.dart';
 import 'package:gobanten/Screens/Signup/signup_screen.dart';
 import 'package:gobanten/Screens/Welcome/components/background.dart';
-import 'package:gobanten/components/rounded_button.dart';
 import 'package:gobanten/Utils/constants.dart';
+import 'package:gobanten/components/rounded_button.dart';
 
-class Body extends StatelessWidget {
+class Body extends StatefulWidget {
+  @override
+  _BodyState createState() => _BodyState();
+}
+
+class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
